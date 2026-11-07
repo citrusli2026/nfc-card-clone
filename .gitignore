@@ -1,0 +1,18 @@
+# 构建产物
+build/
+build-bundle/
+dist/*.aab
+
+# 签名文件
+*.keystore
+*.jks
+
+# 本地私有数据（卡号、dump）
+data/
+
+# IDE / 系统
+.idea/
+*.iml
+.gradle/
+local.properties
+.DS_Store

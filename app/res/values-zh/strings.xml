@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">门禁卡助手</string>
+    <string name="welcome_title">复制你的门禁卡</string>
+    <string name="welcome_sub">三步完成：读原卡 → 写空白卡 → 自动比对</string>
+    <string name="welcome_p1_title">读基准卡</string>
+    <string name="welcome_p1_sub">把原卡贴到手机背面，读出 UID 和全部扇区。</string>
+    <string name="welcome_p2_title">写复制卡</string>
+    <string name="welcome_p2_sub">把 UID 可写的空白卡贴上去，写入同样的数据。</string>
+    <string name="welcome_p3_title">自动比对</string>
+    <string name="welcome_p3_sub">写完立刻读回，逐字节、逐扇区密钥核对。</string>
+    <string name="welcome_agree">我只复制自己有权使用的卡，并了解相关风险</string>
+    <string name="welcome_start">开始使用</string>
+    <string name="welcome_note">需要一台支持 NFC 的安卓手机</string>
+
+    <string name="step_base">基准卡</string>
+    <string name="step_copy">复制卡</string>
+    <string name="step_compare">比对</string>
+
+    <string name="card_base">基准卡</string>
+    <string name="card_copy">复制卡</string>
+    <string name="status_none">未读取</string>
+    <string name="status_read">已读取</string>
+    <string name="status_written">已写入</string>
+    <string name="card_empty_hint">贴原卡读取</string>
+    <string name="card_empty_hint_copy">贴空白卡写入</string>
+
+    <string name="action_read">读基准卡</string>
+    <string name="action_write">写复制卡并校验</string>
+    <string name="action_rewrite">再写一次</string>
+    <string name="action_reset">重置</string>
+    <string name="action_export">导出</string>
+    <string name="action_details">详情</string>
+    <string name="action_history">历史</string>
+    <string name="action_about">关于</string>
+
+    <string name="verdict_idle">还没比对</string>
+    <string name="verdict_ready">基准卡已就绪</string>
+    <string name="verdict_match">完全一致</string>
+    <string name="verdict_diff">有差异</string>
+    <string name="verdict_fail">读卡失败</string>
+
+    <string name="hint_tap_base">把原卡贴到手机背面</string>
+    <string name="hint_tap_copy">把空白卡贴到手机背面</string>
+    <string name="hint_busy">正在处理，别移开卡</string>
+    <string name="hint_idle">先选一个操作</string>
+
+    <string name="nfc_off_title">NFC 未开启</string>
+    <string name="nfc_off_body">去系统设置打开 NFC 再回来</string>
+    <string name="nfc_off_action">去设置</string>
+
+    <string name="details_title">运行日志</string>
+    <string name="history_title">历史记录</string>
+    <string name="history_empty">还没有记录</string>
+    <string name="delete">删除</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="exported">已导出到 Download/DSH-Go/nfc</string>
+    <string name="export_none">没有可导出的文件</string>
+
+    <string name="about_title">关于</string>
+    <string name="about_version">版本</string>
+    <string name="about_desc">门禁卡助手：读取、备份、复制 MIFARE Classic 卡。</string>
+    <string name="about_disclaimer_title">免责声明</string>
+    <string name="about_disclaimer">本工具仅用于复制你本人有权使用的卡。复制他人门禁卡、绕过门禁系统可能违法，也可能违反所在场所的规定。使用者需自行承担全部责任。</string>
+    <string name="about_privacy_title">隐私</string>
+    <string name="about_privacy">应用不联网、不上传任何数据。读到的卡数据只保存在本机。</string>
+    <string name="about_oss">无第三方依赖。</string>
+    <string name="about_nfc_on">可用</string>
+    <string name="about_nfc_off">不可用</string>
+    <string name="about_device_title">设备</string>
+
+    <string name="cmp_identical_sub">%1$d 块 · %2$d 字节 · 0 处不同</string>
+    <string name="cmp_diff_sub">不同 %1$d 字节 / %2$d 块</string>
+    <string name="fmt_sectors">%1$d/%2$d 扇区</string>
+    <string name="read_failed">这张卡读不了</string>
+    <string name="reset_done">已清空</string>
+    <string name="log_not_classic">这不是 MIFARE Classic 卡，读不了扇区数据。</string>
+    <string name="log_cpu_hint">CPU / DESFire 卡手机复制不了，只能找物业。</string>
+    <string name="log_geometry">扇区数 %1$d · 总块数 %2$d</string>
+    <string name="log_sector_locked">扇区 %1$d：密钥没打开</string>
+    <string name="log_sector_ok">扇区 %1$d：OK（Key %2$s %3$s）</string>
+    <string name="log_sector_partial">扇区 %1$d：部分块被访问位挡住</string>
+    <string name="log_opened">打开 %1$d/%2$d 个扇区</string>
+    <string name="log_io_error">连接或读卡失败：%1$s</string>
+    <string name="log_target_not_classic">目标卡不是 MIFARE Classic，写不了。</string>
+    <string name="log_source_empty">克隆源是空的。</string>
+    <string name="log_capacity">容量不够：源 %1$d 块，目标只有 %2$d 块</string>
+    <string name="log_write_start">开始写入 %1$d 块…</string>
+    <string name="log_uid_ok">块 0（UID）写进去了 —— 是 UID 可写卡</string>
+    <string name="log_uid_locked">块 0 写不进去 —— 不是 UID 可写卡，只能写数据块</string>
+    <string name="log_skip_sector">跳过扇区 %1$d（源里没有）</string>
+    <string name="log_auth_failed">扇区 %1$d 认证失败，跳过</string>
+    <string name="log_write_done">写入完成：成功 %1$d 块，失败 %2$d 块</string>
+    <string name="log_verify_ok">校验通过：所有块和源一致</string>
+    <string name="log_verify_bad">校验发现 %1$d 个块不一致</string>
+    <string name="log_write_error">写卡失败：%1$s</string>
+    <string name="log_gen1a">Gen1a 后门没响应</string>
+    <string name="log_read_base">读基准卡：%1$s %2$s</string>
+    <string name="log_write_copy">写复制卡：%1$s</string>
+    <string name="log_verify_pass">—— 读回核对 ——</string>
+    <string name="log_exception">异常：%1$s</string>
+    <string name="log_save_failed">保存失败：%1$s</string>
+    <string name="log_exported_count">导出 %1$d 个文件</string>
+    <string name="history_meta">%1$s · %2$d/%3$d 扇区 · %4$d 块 · %5$s</string>
+    <string name="type_classic_1k">MIFARE Classic 1K</string>
+    <string name="type_classic_4k">MIFARE Classic 4K</string>
+    <string name="type_classic_mini">MIFARE Classic Mini</string>
+    <string name="type_ultralight">MIFARE Ultralight / NTAG</string>
+    <string name="type_desfire">DESFire / CPU 卡（ISO-DEP，复制不了）</string>
+    <string name="type_cpu">国产 CPU 卡（ISO-DEP，复制不了）</string>
+    <string name="type_iso_dep">DESFire / CPU 卡（ISO-DEP）</string>
+    <string name="type_iso15693">ISO 15693 / 其他卡</string>
+    <string name="type_unknown">未知卡型</string>
+    <string name="cmp_block_diff">块 %1$d 内容不同</string>
+    <string name="cmp_key_diff">扇区 %1$d 密钥不同：%2$s → %3$s</string>
+    <string name="cmp_capacity">容量不同：%1$d 块 vs %2$d 块</string>
+    <string name="key_unknown">未知</string>
+    <string name="err_mkdir">无法创建目录 %1$s</string>
+    <string name="err_dump_parse">dump 文件解析失败：%1$s</string>
+    <string name="history_sector_label">扇区</string>
+    <string name="history_bytes_label">字节</string>
+    <string name="language_title">语言</string>
+    <string name="language_system">跟随系统</string>
+</resources>

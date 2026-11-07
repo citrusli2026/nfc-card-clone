@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Card Clone</string>
+    <string name="welcome_title">Copy your access card</string>
+    <string name="welcome_sub">Three steps: read the original, write a blank card, verify automatically.</string>
+    <string name="welcome_p1_title">Read baseline</string>
+    <string name="welcome_p1_sub">Tap the original card to read its UID and every sector.</string>
+    <string name="welcome_p2_title">Write a copy</string>
+    <string name="welcome_p2_sub">Tap a UID-writable blank card and write the same data.</string>
+    <string name="welcome_p3_title">Compare</string>
+    <string name="welcome_p3_sub">Read back instantly and verify byte by byte, key by key.</string>
+    <string name="welcome_agree">I only copy cards I am allowed to use, and I understand the risks.</string>
+    <string name="welcome_start">Get started</string>
+    <string name="welcome_note">Requires a phone with NFC</string>
+
+    <string name="step_base">Baseline</string>
+    <string name="step_copy">Copy</string>
+    <string name="step_compare">Compare</string>
+
+    <string name="card_base">Baseline card</string>
+    <string name="card_copy">Copied card</string>
+    <string name="status_none">Not read</string>
+    <string name="status_read">Ready</string>
+    <string name="status_written">Written</string>
+    <string name="card_empty_hint">Tap the original card</string>
+    <string name="card_empty_hint_copy">Tap a blank card</string>
+
+    <string name="action_read">Read baseline</string>
+    <string name="action_write">Write &amp; verify</string>
+    <string name="action_rewrite">Write again</string>
+    <string name="action_reset">Reset</string>
+    <string name="action_export">Export</string>
+    <string name="action_details">Details</string>
+    <string name="action_history">History</string>
+    <string name="action_about">About</string>
+
+    <string name="verdict_idle">Nothing to compare yet</string>
+    <string name="verdict_ready">Baseline ready</string>
+    <string name="verdict_match">Identical</string>
+    <string name="verdict_diff">Differences found</string>
+    <string name="verdict_fail">Could not read</string>
+
+    <string name="hint_tap_base">Tap the original card on the back of the phone</string>
+    <string name="hint_tap_copy">Tap the blank card on the back of the phone</string>
+    <string name="hint_busy">Working — keep the card in place</string>
+    <string name="hint_idle">Pick an action to start</string>
+
+    <string name="nfc_off_title">NFC is off</string>
+    <string name="nfc_off_body">Turn NFC on in system settings, then come back.</string>
+    <string name="nfc_off_action">Open settings</string>
+
+    <string name="details_title">Log</string>
+    <string name="history_title">History</string>
+    <string name="history_empty">No records yet</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="exported">Exported to Download/DSH-Go/nfc</string>
+    <string name="export_none">Nothing to export</string>
+
+    <string name="about_title">About</string>
+    <string name="about_version">Version</string>
+    <string name="about_desc">Card Clone reads, backs up and copies MIFARE Classic cards.</string>
+    <string name="about_disclaimer_title">Disclaimer</string>
+    <string name="about_disclaimer">Use this tool only for cards you are authorized to use. Copying someone else\'s access card or bypassing an access control system may be illegal and may violate local rules. You are responsible for how you use it.</string>
+    <string name="about_privacy_title">Privacy</string>
+    <string name="about_privacy">The app works offline and uploads nothing. Card data stays on this device.</string>
+    <string name="about_oss">No third-party dependencies.</string>
+    <string name="about_nfc_on">available</string>
+    <string name="about_nfc_off">not available</string>
+    <string name="about_device_title">Device</string>
+
+    <string name="cmp_identical_sub">%1$d blocks · %2$d bytes · 0 differences</string>
+    <string name="cmp_diff_sub">%1$d bytes / %2$d blocks differ</string>
+    <string name="fmt_sectors">%1$d/%2$d sectors</string>
+    <string name="read_failed">This card cannot be read</string>
+    <string name="reset_done">Cleared</string>
+    <string name="log_not_classic">Not a MIFARE Classic card — sector data cannot be read.</string>
+    <string name="log_cpu_hint">CPU / DESFire cards cannot be copied from a phone — ask your building manager.</string>
+    <string name="log_geometry">Sectors %1$d · blocks %2$d</string>
+    <string name="log_sector_locked">Sector %1$d: no key matched</string>
+    <string name="log_sector_ok">Sector %1$d: OK (Key %2$s, %3$s)</string>
+    <string name="log_sector_partial">Sector %1$d: some blocks blocked by access bits</string>
+    <string name="log_opened">Opened %1$d/%2$d sectors</string>
+    <string name="log_io_error">Connect or read failed: %1$s</string>
+    <string name="log_target_not_classic">Target is not MIFARE Classic — cannot write.</string>
+    <string name="log_source_empty">Clone source is empty.</string>
+    <string name="log_capacity">Not enough space: source %1$d blocks, target %2$d blocks</string>
+    <string name="log_write_start">Writing %1$d blocks…</string>
+    <string name="log_uid_ok">Block 0 (UID) written — UID-writable card</string>
+    <string name="log_uid_locked">Block 0 not writable — data-only card</string>
+    <string name="log_skip_sector">Skipping sector %1$d (not in source)</string>
+    <string name="log_auth_failed">Sector %1$d: authentication failed, skipped</string>
+    <string name="log_write_done">Write done: %1$d blocks OK, %2$d failed</string>
+    <string name="log_verify_ok">Verified: every block matches the source</string>
+    <string name="log_verify_bad">Verification found %1$d mismatched blocks</string>
+    <string name="log_write_error">Write failed: %1$s</string>
+    <string name="log_gen1a">Gen1a backdoor did not respond</string>
+    <string name="log_read_base">Reading baseline: %1$s %2$s</string>
+    <string name="log_write_copy">Writing copy: %1$s</string>
+    <string name="log_verify_pass">— reading back for verification —</string>
+    <string name="log_exception">Error: %1$s</string>
+    <string name="log_save_failed">Save failed: %1$s</string>
+    <string name="log_exported_count">Exported %1$d files</string>
+    <string name="history_meta">%1$s · %2$d/%3$d sectors · %4$d blocks · %5$s</string>
+    <string name="type_classic_1k">MIFARE Classic 1K</string>
+    <string name="type_classic_4k">MIFARE Classic 4K</string>
+    <string name="type_classic_mini">MIFARE Classic Mini</string>
+    <string name="type_ultralight">MIFARE Ultralight / NTAG</string>
+    <string name="type_desfire">DESFire / CPU card (ISO-DEP, cannot copy)</string>
+    <string name="type_cpu">CPU card (ISO-DEP, cannot copy)</string>
+    <string name="type_iso_dep">DESFire / CPU card (ISO-DEP)</string>
+    <string name="type_iso15693">ISO 15693 / other card</string>
+    <string name="type_unknown">Unknown card type</string>
+    <string name="cmp_block_diff">Block %1$d differs</string>
+    <string name="cmp_key_diff">Sector %1$d key differs: %2$s → %3$s</string>
+    <string name="cmp_capacity">Capacity differs: %1$d blocks vs %2$d blocks</string>
+    <string name="key_unknown">unknown</string>
+    <string name="err_mkdir">Cannot create folder %1$s</string>
+    <string name="err_dump_parse">Cannot parse dump file: %1$s</string>
+    <string name="history_sector_label">Sectors</string>
+    <string name="history_bytes_label">Bytes</string>
+    <string name="language_title">Language</string>
+    <string name="language_system">Follow system</string>
+</resources>
