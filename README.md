@@ -8,6 +8,8 @@
   <img src="assets/icon-512.png" width="120" alt="icon">
 </p>
 
+![Card Clone](assets/feature-1024x500.png)
+
 ## 功能
 
 - **三步流程**：读基准卡 → 写复制卡 → 自动比对，每一步都有明确结果
@@ -56,14 +58,22 @@
 | 依赖 | 说明 |
 | --- | --- |
 | JDK 17 | `apt install openjdk-17-jdk-headless` |
-| `aapt2` / `zipalign` / `apksigner` | Debian/Ubuntu 的 `android-sdk-build-tools` 包自带 arm64 版 |
-| `android.jar` | API 29，放 `/root/.cache/android/android-10/` |
-| `r8.jar`（含 d8） | `/root/.cache/android/r8.jar` |
-| `bundletool`（可选） | 打包 AAB 用 |
+| `aapt2` / `zipalign` / `apksigner` | Debian/Ubuntu 的 `android-sdk-build-tools` 自带 arm64 版；其他平台用 Android SDK 里的 |
+| `android.jar` | API 29（`platforms/android-29/android.jar`） |
+| `r8.jar`（含 d8） | 从 Google Maven 下载 `com.android.tools:r8` |
 
-路径都能用环境变量覆盖：`ANDROID_JAR`、`AAPT2`、`D8_JAR`、`APKSIGNER`、`ZIPALIGN`、`KEYSTORE`。
+所有路径都能用环境变量覆盖，默认值写在 `build.sh` 顶部：
 
-> 脚本默认按 arm64 Linux（如手机上的 proot Ubuntu）写的，x86_64 机器上把 `AAPT2` 等指向对应路径即可。
+```bash
+ANDROID_JAR=/path/to/android.jar \
+AAPT2=/path/to/aapt2 \
+D8_JAR=/path/to/r8.jar \
+APKSIGNER=/path/to/apksigner \
+ZIPALIGN=/path/to/zipalign \
+./build.sh
+```
+
+> 默认路径按 arm64 Linux 写的（比如手机上的 proot Ubuntu），x86_64 机器上换成对应路径即可。
 
 ## 目录
 
