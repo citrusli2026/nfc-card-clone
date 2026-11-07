@@ -102,7 +102,7 @@ ZIPALIGN=/path/to/zipalign \
 git tag v0.2 && git push origin v0.2
 ```
 
-细节见 [docs/releasing.md](docs/releasing.md)。
+细节见 [docs/releasing.md](docs/releasing.md)，也可以用 `tools/publish_github.py` 一条命令建仓库 + 发 Release。
 
 ## 说明
 

@@ -24,6 +24,24 @@ git push origin v0.2
 
 需要仓库开启 **Actions** 与 **Read and write permissions**（Settings → Actions → General → Workflow permissions）。
 
+## 一条命令发布（不进 Actions）
+
+仓库里带了 `tools/publish_github.py`，用 GitHub API 建仓库、推代码、建 Release、传 APK：
+
+```bash
+export GH_TOKEN=<你的 token>          # 细粒度: Contents 读写 + Administration 读写；或 classic 的 repo
+python3 tools/publish_github.py --repo card-clone --tag v0.2
+```
+
+它会：
+1. 用 `/user` 确认账号
+2. 仓库不存在就创建（默认公开）
+3. 推 `main` 和所有 tag
+4. 建 Release 并把 `dist/nfc-tool.apk` 作为附件上传
+5. 推完把 remote URL 里的 token 移除
+
+> token 只在内存和临时 remote 里用一下，不会写进提交。用完建议在 GitHub 上撤销。
+
 ## 手动建 Release
 
 没有 Actions 也可以：
