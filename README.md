@@ -94,6 +94,16 @@ ZIPALIGN=/path/to/zipalign \
 └── dist/nfc-tool.apk   已构建的安装包
 ```
 
+## 发布
+
+打 tag 自动出 Release（附可安装的 APK）：
+
+```bash
+git tag v0.2 && git push origin v0.2
+```
+
+细节见 [docs/releasing.md](docs/releasing.md)。
+
 ## 说明
 
 - 这是个人工具，没有上架应用商店；直接装 APK 即可

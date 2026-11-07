@@ -1,0 +1,51 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Android SDK
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Build APK
+        run: |
+          export ANDROID_JAR="$ANDROID_HOME/platforms/android-35/android.jar"
+          export AAPT2="$ANDROID_HOME/build-tools/35.0.0/aapt2"
+          export D8_JAR="$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar"
+          export APKSIGNER="$ANDROID_HOME/build-tools/35.0.0/apksigner"
+          export ZIPALIGN="$ANDROID_HOME/build-tools/35.0.0/zipalign"
+          export KEYSTORE="$RUNNER_TEMP/ci.jks"
+          keytool -genkeypair -keystore "$KEYSTORE" -storepass android \
+            -keypass android -alias ci -keyalg RSA -keysize 2048 -validity 10000 \
+            -dname "CN=CI,O=CardClone,C=CN"
+          ./build.sh
+          cp build/nfc-tool.apk "card-clone-${GITHUB_REF_NAME}.apk"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: card-clone-*.apk
+          generate_release_notes: true
+          body: |
+            Side-loadable APK (debug-signed). Requires Android 5.0+ and NFC.
+
+            MIFARE Classic 1K/4K only. Use it only on cards you are authorized to copy.
