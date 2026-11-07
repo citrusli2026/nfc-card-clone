@@ -55,6 +55,8 @@ def main():
     ap.add_argument("--tag", default="v0.2")
     ap.add_argument("--apk", default="dist/nfc-tool.apk")
     ap.add_argument("--no-release", action="store_true")
+    ap.add_argument("--enable-actions-write", action="store_true",
+                    help="把仓库 Actions 默认权限改成读写，让 release.yml 能建 Release")
     args = ap.parse_args()
 
     if not args.token:
@@ -89,6 +91,11 @@ def main():
     else:
         print("查询失败:", status, info.get("message"))
         return 1
+
+    if args.enable_actions_write:
+        st, r = api("PUT", f"/repos/{full}/actions/permissions/workflow", args.token,
+                    {"default_workflow_permissions": "write"})
+        print("Actions 权限:", "已设为读写" if st in (200, 204) else f"设置失败 {st} {r.get('message')}")
 
     # 推送（token 只临时放在 remote URL 里，推完还原）
     auth_url = f"https://x-access-token:{args.token}@github.com/{full}.git"
