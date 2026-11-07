@@ -1,8 +1,10 @@
-# 门禁卡助手 · Card Clone
+# Card Clone
 
-把门禁卡复制到空白卡上的安卓工具：**读原卡 → 写空白卡 → 自动比对**。
+**English** | [简体中文](README.zh.md)
 
-只支持 MIFARE Classic（1K / 4K），只用 NFC，全程离线。
+Copy a MIFARE Classic access card onto a blank card: **read the original → write a blank → verify automatically**.
+
+NFC only. Fully offline. MIFARE Classic 1K / 4K.
 
 <p align="center">
   <img src="assets/icon-512.png" width="120" alt="icon">
@@ -10,61 +12,62 @@
 
 ![Card Clone](assets/feature-1024x500.png)
 
-## 功能
+## Features
 
-- **三步流程**：读基准卡 → 写复制卡 → 自动比对，每一步都有明确结果
-- **自动校验**：写完立刻读回，逐字节、逐块、逐扇区密钥核对，直接告诉你「完全一致」还是「有差异」，差异会指出哪个块、哪个扇区
-- **17 种语言**：简繁中文、英、日、韩、西、葡、法、德、意、俄、阿、印地、印尼、越、泰、土；可在「关于 → 语言」手动切换，默认跟随系统
-- **深色模式**：跟随系统
-- **历史记录**：每次读写都存档，可查看密钥、删除
-- **离线**：不联网、不上传，卡数据只存在应用私有目录
-- **零第三方依赖**：不用 AndroidX，APK 约 250 KB
+- **Three steps**: read a baseline card, write the copy, compare automatically
+- **Verified, not assumed**: after writing, the app reads the copy back and compares it byte by byte, block by block and sector key by sector key. You get a clear "Identical" or "Differences found", with the exact blocks and sector keys that differ
+- **17 languages**: English, Simplified/Traditional Chinese, Japanese, Korean, Spanish, Portuguese (BR), French, German, Italian, Russian, Arabic, Hindi, Indonesian, Vietnamese, Thai, Turkish. Switch in-app under About → Language, default follows the system
+- **Dark mode**: follows the system
+- **History**: every read and write is stored locally, viewable and deletable
+- **Offline**: no network, no uploads; card data stays in the app's private storage
+- **No third-party libraries**: no AndroidX, ~250 KB APK
 
-## 下载
+## Download
 
-- [Releases](https://github.com/citrusli2026/nfc-card-clone/releases/latest)：CI 构建的 APK，每次打 tag 自动更新
-- 仓库里的 [`dist/nfc-tool.apk`](dist/nfc-tool.apk)：本地构建版本
+- [Releases](https://github.com/citrusli2026/nfc-card-clone/releases/latest): APK built by CI on every tag
+- [`dist/nfc-tool.apk`](dist/nfc-tool.apk): local build
 
-两个包的签名不同（CI 每次用临时密钥），互相覆盖安装需要先卸载。
+The two are signed with different keys (CI uses an ephemeral key), so switching between them requires uninstalling first.
 
-## 支持的卡
+## Supported cards
 
-| 卡型 | 读 | 写 | 说明 |
+| Card | Read | Write | Notes |
 | --- | --- | --- | --- |
-| MIFARE Classic 1K / 4K | ✅ | ✅ | 主目标；密钥能打开就能完整复制 |
-| MIFARE Ultralight / NTAG | ❌ | ❌ | 不在支持范围 |
-| CPU 卡 / DESFire | ❌ | ❌ | 双向认证，手机复制不了 |
-| 125kHz ID 卡 | ❌ | ❌ | 手机 NFC 不支持该频段 |
+| MIFARE Classic 1K / 4K | ✅ | ✅ | Main target; full copy if the keys open |
+| MIFARE Ultralight / NTAG | ❌ | ❌ | Not supported |
+| CPU card / DESFire | ❌ | ❌ | Mutual authentication; a phone cannot copy it |
+| 125 kHz ID card | ❌ | ❌ | Phone NFC does not operate at 125 kHz |
 
-复制到空白卡需要 **UID 可写卡**（CUID / FUID / Gen2），普通空白卡写不进 UID。
+Writing a usable copy needs a **UID-writable blank card** (CUID / FUID / Gen2). Ordinary blanks keep their factory UID and will not open the same door.
 
-## 使用
+## Usage
 
-1. 贴原卡，点「读基准卡」，读出 UID 和全部扇区
-2. 贴 UID 可写空白卡，点「写复制卡并校验」
-3. 等横幅显示「完全一致」，拿去刷
+1. Tap the original card, press **Read baseline**
+2. Tap the UID-writable blank card, press **Write & verify**
+3. Wait for the green **Identical** banner, then try it on the door
 
-如果刷不开：可能是读卡器校验了更多东西（滚动码、卡型、白名单），或者原卡是 CPU 卡。
+If the copy does not open the door, the reader probably checks more than the UID
+(rolling codes, card type, a whitelist), or the original is a CPU card.
 
-## 自己构建
+## Build
 
-不需要 Gradle，`aapt2 + javac + d8 + apksigner` 直接出包。
+No Gradle needed: `aapt2 + javac + d8 + apksigner`.
 
 ```bash
-./build.sh            # 出 APK 到 build/nfc-tool.apk
-./tools/test.sh       # 比对逻辑的单元测试（不需要手机）
+./build.sh            # -> build/nfc-tool.apk
+./tools/test.sh       # comparison logic tests, no phone required
 ```
 
-需要：
+Requirements:
 
-| 依赖 | 说明 |
+| Dependency | Notes |
 | --- | --- |
 | JDK 17 | `apt install openjdk-17-jdk-headless` |
-| `aapt2` / `zipalign` / `apksigner` | Debian/Ubuntu 的 `android-sdk-build-tools` 自带 arm64 版；其他平台用 Android SDK 里的 |
-| `android.jar` | API 29（`platforms/android-29/android.jar`） |
-| `r8.jar`（含 d8） | 从 Google Maven 下载 `com.android.tools:r8` |
+| `aapt2`, `zipalign`, `apksigner` | Debian/Ubuntu `android-sdk-build-tools` ships arm64 builds; otherwise use the Android SDK ones |
+| `android.jar` | API 29 (`platforms/android-29/android.jar`) |
+| `r8.jar` (contains d8) | `com.android.tools:r8` from Google Maven |
 
-所有路径都能用环境变量覆盖，默认值写在 `build.sh` 顶部：
+Every path can be overridden with an environment variable (defaults are at the top of `build.sh`):
 
 ```bash
 ANDROID_JAR=/path/to/android.jar \
@@ -75,60 +78,37 @@ ZIPALIGN=/path/to/zipalign \
 ./build.sh
 ```
 
-> 默认路径按 arm64 Linux 写的（比如手机上的 proot Ubuntu），x86_64 机器上换成对应路径即可。
+> Defaults assume arm64 Linux (e.g. proot Ubuntu on a phone); on x86_64 just point the variables at your SDK.
 
-## 目录
+## Layout
 
 ```
-├── app/                安卓源码（Java + res，17 种语言）
-├── build.sh            一键出 APK
+├── app/                Android sources (Java + res, 17 languages)
+├── build.sh            one-shot APK build
 ├── tools/
-│   ├── test.sh         比对逻辑单元测试
-│   ├── verify_dump.py  两份 dump 的逐字节对比（可在电脑上跑）
-│   ├── build_bundle.sh 打 AAB
-│   └── make_*.py       图标与商店图生成
+│   ├── test.sh         comparison unit tests
+│   ├── verify_dump.py  byte-level diff of two dumps (runs on desktop)
+│   ├── build_bundle.sh AAB packaging
+│   └── make_*.py       icon / store image generation
 ├── docs/
-│   ├── principle.md    原理：卡里有什么、为什么手机复制不了加密卡
-│   ├── usage.md        App 使用与实现说明
-│   ├── card-guide.md   卡型识别与操作手册
-│   └── play/           可选的 Google Play 上架材料（文案、隐私政策、清单）
-├── assets/             图标与商店图
-└── dist/nfc-tool.apk   已构建的安装包
+│   ├── principle.md    what is inside a card, why encrypted cards cannot be copied
+│   ├── usage.md        app behaviour and implementation notes
+│   ├── card-guide.md   card identification and manual
+│   └── play/           optional Google Play materials (listing, privacy policy, checklist)
+├── assets/             icon and banner
+└── dist/nfc-tool.apk   prebuilt APK
 ```
 
-## 发布
+## Notes
 
-打 tag 自动出 Release（附可安装的 APK）：
+- Personal tool, not on any app store; sideload the APK
+- Runtime logs exist in two sets only: Chinese on Chinese systems, English otherwise
+- No export feature; dumps stay in the app's private directory (delete them from History)
 
-```bash
-git tag v0.2 && git push origin v0.2
-```
+## Disclaimer
 
-细节见 [docs/releasing.md](docs/releasing.md)，也可以用 `tools/publish_github.py` 一条命令建仓库 + 发 Release。
-
-## 说明
-
-- 这是个人工具，没有上架应用商店；直接装 APK 即可
-- 运行日志只做中英两套：中文系统显示中文，其余语言显示英文
-- 不提供导出功能，dump 只留在应用私有目录（可在历史里删除）
-
-## 免责声明
-
-本工具仅用于复制你本人有权使用的卡。复制他人门禁卡、绕过门禁系统可能违法，也可能违反所在场所的规定，使用者自行承担全部责任。
+Use this tool only for cards you are authorized to use. Copying someone else's access card or bypassing an access control system may be illegal and may violate local rules. You are responsible for how you use it.
 
 ## License
 
-MIT，见 [LICENSE](LICENSE)。
-
----
-
-## English
-
-**Card Clone** reads a MIFARE Classic card, writes an identical copy to a UID-writable blank card, then reads it back and verifies byte by byte, block by block and key by key.
-
-- Android 5.0+ (API 21), NFC required, works offline, no third-party libraries
-- MIFARE Classic 1K/4K only; Ultralight, DESFire/CPU cards and 125 kHz cards are not supported
-- 17 UI languages, dark mode, history, in-app language switch
-- Build: `./build.sh` (aapt2 + javac + d8 + apksigner, no Gradle)
-
-Use it only on cards you are authorized to copy.
+MIT, see [LICENSE](LICENSE).
