@@ -34,6 +34,7 @@ jobs:
           export APKSIGNER="$ANDROID_HOME/build-tools/35.0.0/apksigner"
           export ZIPALIGN="$ANDROID_HOME/build-tools/35.0.0/zipalign"
           export KEYSTORE="$RUNNER_TEMP/ci.jks"
+          export KS_ALIAS=ci
           keytool -genkeypair -keystore "$KEYSTORE" -storepass android \
             -keypass android -alias ci -keyalg RSA -keysize 2048 -validity 10000 \
             -dname "CN=CI,O=CardClone,C=CN"

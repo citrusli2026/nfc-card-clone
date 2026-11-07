@@ -12,6 +12,7 @@ D8_JAR="${D8_JAR:-$CACHE/r8.jar}"
 APKSIGNER="${APKSIGNER:-/usr/bin/apksigner}"
 ZIPALIGN="${ZIPALIGN:-/usr/bin/zipalign}"
 KS="${KEYSTORE:-$CACHE/debug.keystore}"
+KS_ALIAS="${KS_ALIAS:-androiddebugkey}"
 TARGET_SDK="${TARGET_SDK:-29}"
 MANIFEST="$ROOT/app/AndroidManifest.xml"
 
@@ -66,7 +67,7 @@ if [ ! -f "$KS" ]; then
 fi
 
 "$APKSIGNER" sign --ks "$KS" --ks-pass pass:android \
-  --key-pass pass:android --ks-key-alias androiddebugkey \
+  --key-pass pass:android --ks-key-alias "$KS_ALIAS" \
   --out "$BUILD/nfc-tool.apk" "$BUILD/aligned.apk"
 
 "$APKSIGNER" verify --print-certs "$BUILD/nfc-tool.apk" | head -3

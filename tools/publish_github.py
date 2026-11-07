@@ -42,7 +42,8 @@ def api(method, path, token, data=None, raw=None, ctype="application/json"):
 
 
 def git(*args, **kw):
-    return subprocess.run(["git", "-C", ROOT] + list(args), check=True, **kw)
+    kw.setdefault("check", True)
+    return subprocess.run(["git", "-C", ROOT] + list(args), **kw)
 
 
 def main():
@@ -97,6 +98,14 @@ def main():
                     {"default_workflow_permissions": "write"})
         print("Actions 权限:", "已设为读写" if st in (200, 204) else f"设置失败 {st} {r.get('message')}")
 
+    # 先在本地建好 tag，推送时一起带上
+    if not args.no_release:
+        tags = subprocess.run(["git", "-C", ROOT, "tag", "-l", args.tag],
+                              capture_output=True, text=True).stdout.strip()
+        if not tags:
+            git("tag", "-a", args.tag, "-m", f"Card Clone {args.tag}")
+            print("已创建 tag", args.tag)
+
     # 推送（token 只临时放在 remote URL 里，推完还原）
     auth_url = f"https://x-access-token:{args.token}@github.com/{full}.git"
     plain_url = f"https://github.com/{full}.git"
@@ -114,14 +123,6 @@ def main():
     if args.no_release:
         print("完成（跳过 Release）")
         return 0
-
-    # 确保 tag 存在
-    tags = subprocess.run(["git", "-C", ROOT, "tag", "-l", args.tag],
-                          capture_output=True, text=True).stdout.strip()
-    if not tags:
-        git("tag", "-a", args.tag, "-m", f"Card Clone {args.tag}")
-        git("push", "origin", args.tag)
-        print("已创建并推送 tag", args.tag)
 
     status, rel = api("GET", f"/repos/{full}/releases/tags/{args.tag}", args.token)
     if status == 200:
