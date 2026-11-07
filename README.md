@@ -22,8 +22,10 @@
 
 ## 下载
 
-- 直接装：[`dist/nfc-tool.apk`](dist/nfc-tool.apk)（debug 签名，自用没问题）
-- 需要正式签名，用 `./build.sh` 自己出包
+- [Releases](https://github.com/citrusli2026/nfc-card-clone/releases/latest)：CI 构建的 APK，每次打 tag 自动更新
+- 仓库里的 [`dist/nfc-tool.apk`](dist/nfc-tool.apk)：本地构建版本
+
+两个包的签名不同（CI 每次用临时密钥），互相覆盖安装需要先卸载。
 
 ## 支持的卡
 
